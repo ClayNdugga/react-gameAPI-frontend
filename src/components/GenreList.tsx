@@ -1,7 +1,9 @@
+// import useData from "../hooks/useData";
 import useGenres from "../hooks/useGenres";
 
 const GenreList = () => {
-  const { genres } = useGenres();
+  const { data: genres } = useGenres();
+    // const {data} = useData<Genre>('/genres') not best practice as components should not know about endpoints
 
   return (
     <>
