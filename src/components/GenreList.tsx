@@ -2,6 +2,7 @@
 import {
   Button,
   HStack,
+  Heading,
   Image,
   List,
   ListItem,
@@ -12,8 +13,8 @@ import useGenres, { Genre } from "../hooks/useGenres";
 import getCroppedImageURL from "../services/image-url";
 
 interface Props {
-  onSelectGenre: (genre: Genre) => void
-  selectedGenre: Genre | null
+  onSelectGenre: (genre: Genre) => void;
+  selectedGenre: Genre | null;
 }
 
 const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
@@ -25,6 +26,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
 
   return (
     <>
+      <Heading fontSize='2xl' marginBottom={3}> Genres </Heading>
       <List>
         {isLoading &&
           skeletons.map((skeleton) => (
@@ -37,12 +39,15 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
               <Image
                 boxSize="32px"
                 borderRadius={8}
+                objectFit="cover"
                 src={getCroppedImageURL(genre.image_background)}
               />
               <Button
+                whiteSpace="normal"
+                textAlign="left"
                 onClick={() => console.log(onSelectGenre(genre))}
                 variant="link"
-                fontWeight={genre.id === selectedGenre?.id ? 'bold' : 'normal'}
+                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
               >
                 <Text fontSize="md">{genre.name}</Text>
               </Button>
