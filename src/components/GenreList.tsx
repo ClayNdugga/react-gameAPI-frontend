@@ -1,13 +1,52 @@
 // import useData from "../hooks/useData";
-import useGenres from "../hooks/useGenres";
+import {
+    Button,
+  HStack,
+  Image,
+  List,
+  ListItem,
+  Skeleton,
+  Text,
+} from "@chakra-ui/react";
+import useGenres, { Genre } from "../hooks/useGenres";
+import getCroppedImageURL from "../services/image-url";
 
-const GenreList = () => {
-  const { data: genres } = useGenres();
-    // const {data} = useData<Genre>('/genres') not best practice as components should not know about endpoints
+
+interface Props {
+    onSelectGenre: (genre: Genre) => void
+}
+
+
+
+const GenreList = ({onSelectGenre}: Props) => {
+  const { data: genres, isLoading, error } = useGenres();
+  // const {data} = useData<Genre>('/genres') not best practice as components should not know about endpoints
+  const skeletons = [1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,15,16,17];
+
+  if (error) return null;
 
   return (
     <>
-    {genres.map(genre => <li key={genre.id}>{genre.name}</li>)}
+      <List>
+          {isLoading &&
+            skeletons.map((skeleton) => (
+              <Skeleton height="32px" key={skeleton} paddingY='5px'/>
+            ))}
+
+
+        {genres.map((genre) => (
+          <ListItem key={genre.id} paddingY="5px">
+            <HStack>
+              <Image
+                boxSize="32px"
+                borderRadius={8}
+                src={getCroppedImageURL(genre.image_background)}
+              />
+              <Button onClick={() => console.log(onSelectGenre(genre))} variant='link'><Text fontSize="md">{genre.name}</Text></Button>
+            </HStack>
+          </ListItem>
+        ))}
+      </List>
     </>
   );
 };
