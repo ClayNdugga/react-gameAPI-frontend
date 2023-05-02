@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
+import apiClient, { FetchResponse } from "../services/api-client";
 import { AxiosRequestConfig, CanceledError } from "axios";
 
 
 
-
-interface FetchResponse<T> {
-    count: number
-    results: T[]
-}
 
 const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?: any[]) => {  //? makes request optional
     const [data, setData] = useState<T[]>([])
