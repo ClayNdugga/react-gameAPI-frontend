@@ -14,10 +14,10 @@ import getCroppedImageURL from "../services/image-url";
 
 interface Props {
   onSelectGenre: (genre: Genre) => void;
-  selectedGenre: Genre | null;
+  selectedGenreId?: number;
 }
 
-const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
+const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
   const { data: genres, isLoading, error } = useGenres();
   // const {data} = useData<Genre>('/genres') not best practice as components should not know about endpoints
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
@@ -26,7 +26,10 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
 
   return (
     <>
-      <Heading fontSize='2xl' marginBottom={3}> Genres </Heading>
+      <Heading fontSize="2xl" marginBottom={3}>
+        {" "}
+        Genres{" "}
+      </Heading>
       <List>
         {isLoading &&
           skeletons.map((skeleton) => (
@@ -47,7 +50,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                 textAlign="left"
                 onClick={() => console.log(onSelectGenre(genre))}
                 variant="link"
-                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+                fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
               >
                 <Text fontSize="md">{genre.name}</Text>
               </Button>
