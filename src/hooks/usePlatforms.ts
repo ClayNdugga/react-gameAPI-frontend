@@ -18,5 +18,6 @@ const usePlatforms = () =>
     staleTime: ms('24h')
     // initalData: platforms
   });
+  
 
 export default usePlatforms;
