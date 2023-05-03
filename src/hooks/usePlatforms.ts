@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
+import ms from 'ms';
 import APIClient from "../services/api-client";
-import platforms from "../data/platforms";
-import ms from 'ms'
 // const usePlatforms = () => useData<Platform>("/platforms/lists/parents"); //? optional chaining incase of null, then params is also null
 
 export interface Platform {
